@@ -29,7 +29,7 @@
               <a class="nav-link active" aria-current="page" href="#">Accueil</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Code</a>
+              <a class="nav-link" href="index.php?ctl=compte&action=compte">Voiture</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="#">Conduite</a>

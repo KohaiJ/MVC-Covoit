@@ -12,11 +12,8 @@ class DbCompte {
         $sql = "UPDATE etudiant SET vehicule = :vehicule WHERE email = :email";
         $stmt = $conn->prepare($sql);
         
-        // Convertir 'oui' ou 'non' en vrai/faux
-        $vehicule = ($possede_voiture === 'oui') ? true : false;
-
-        // Lier les paramètres
-        $stmt->bindParam(':vehicule', $vehicule, PDO::PARAM_BOOL);
+        // Lier les paramètres (vehicule est soit 1 soit 0)
+        $stmt->bindParam(':vehicule', $possede_voiture, PDO::PARAM_INT);
         $stmt->bindParam(':email', $email);
         
         // Exécuter la requête
