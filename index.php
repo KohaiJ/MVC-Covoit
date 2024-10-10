@@ -28,6 +28,4 @@ if (!isset($_GET['ctl'])) {
 
 include 'vue/footer.php'; // L'inclusion du footer est toujours faite
 
-
-// ADZFERTYKTRHZEF
 ?>
