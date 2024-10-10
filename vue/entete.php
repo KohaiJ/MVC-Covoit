@@ -8,6 +8,8 @@
   
   <!-- FontAwesome (si tu utilises les icônes) -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+  <link rel="stylesheet" href="./style.css">
   
   <title>Covoiturage</title>
 </head>
@@ -24,10 +26,10 @@
           <!-- Vérification de la connexion de l'utilisateur -->
           <?php if (isset($_SESSION['connect']) && $_SESSION['connect'] === true): ?>
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="index.php?ctl=body">Accueil</a>
+              <a class="nav-link active" aria-current="page" href="#">Accueil</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="index.php?ctl=compte&action=compte">Voiture</a>
+              <a class="nav-link" href="#">Code</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="#">Conduite</a>
