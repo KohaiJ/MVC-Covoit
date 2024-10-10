@@ -26,7 +26,7 @@ class DbConnect {
                 return [
                     'success' => true,
                     'nom' => $nom 
-                    'email' => $email 
+                    
                     // Retourner le nom si la connexion est réussie
                 ];
             } else {

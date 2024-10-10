@@ -13,6 +13,11 @@ switch($action){
 
 
             case 'updateVoiture' :
+                $email = $_SESSION['email']; // Vérifiez que cette ligne récupère bien l'email de l'utilisateur.
+            if (empty($email)) {
+            echo "Erreur : l'email n'est pas défini dans la session.";
+            return;
+            }
                 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     // Récupérer l'email de l'utilisateur depuis la session
                     $email = $_SESSION['email']; // Assurez-vous que l'email est stocké dans la session
