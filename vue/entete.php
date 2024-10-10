@@ -26,7 +26,7 @@
           <!-- Vérification de la connexion de l'utilisateur -->
           <?php if (isset($_SESSION['connect']) && $_SESSION['connect'] === true): ?>
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="#">Accueil</a>
+              <a class="nav-link active" aria-current="page" href="index.php?ctl=body">Accueil</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="index.php?ctl=compte&action=compte">Voiture</a>

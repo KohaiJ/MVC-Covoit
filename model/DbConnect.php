@@ -25,7 +25,9 @@ class DbConnect {
             if (password_verify($pwd, $hashedPassword)) {
                 return [
                     'success' => true,
-                    'nom' => $nom  // Retourner le nom si la connexion est réussie
+                    'nom' => $nom 
+                    'email' => $email 
+                    // Retourner le nom si la connexion est réussie
                 ];
             } else {
                 return [
