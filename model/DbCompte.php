@@ -1,11 +1,11 @@
 <?php
 require_once "MysqlDb.php";
 
+
 class DbCompte {
-    
     // Méthode pour mettre à jour le statut de la voiture de l'étudiant
     public static function updateVoitureStatus($email, $possede_voiture) {
-        // Connexion à la base de données
+        // Connexion à la base de données via MySqlDb (assure-toi que la classe MySqlDb est correctement configurée)
         $conn = MySqlDb::getPdoDb();
         
         // Requête pour mettre à jour la colonne 'vehicule' de l'étudiant
@@ -16,8 +16,7 @@ class DbCompte {
         $stmt->bindParam(':vehicule', $possede_voiture, PDO::PARAM_INT);
         $stmt->bindParam(':email', $email);
         
-        // Exécuter la requête
-        return $stmt->execute(); // Renvoie vrai si la mise à jour a réussi, faux sinon
+        // Exécuter la requête et renvoyer le résultat
+        return $stmt->execute(); // Renvoie true si la mise à jour a réussi, false sinon
     }
 }
-?>

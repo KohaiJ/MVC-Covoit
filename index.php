@@ -12,6 +12,9 @@ if (isset($_GET['ctl'])) {
             include 'controleur/ctlCompte.php';
             break;
         // Ajoutez d'autres contrôleurs si nécessaire
+        case 'body':
+            include 'vue/body.php';
+            break;
     }
 }
 

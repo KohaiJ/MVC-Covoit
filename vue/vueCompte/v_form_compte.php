@@ -8,20 +8,20 @@
 </head>
 <body>
     <div class="container mt-5">
-        <form action="index.php?controller=ctlCompte&action=compte" method="post">
+        <form action="index.php?controller=ctlCompte&action=updateVoiture" method="post">
             <div class="mb-3">
                 <label class="form-label">Possédez-vous une voiture ?</label>
                 <div class="form-check">
-                    <input class="form-check-input" type="radio" name="voitureCheck" id="oui" value="oui">
+                    <input class="form-check-input" type="radio" name="voiture" id="oui" value="oui">
                     <label class="form-check-label" for="oui">Oui</label>
                 </div>
                 <div class="form-check">
-                    <input class="form-check-input" type="radio" name="voitureCheck" id="non" value="non" checked>
+                    <input class="form-check-input" type="radio" name="voiture" id="non" value="non" checked>
                     <label class="form-check-label" for="non">Non</label>
                 </div>
             </div>
 
-            <button type="submit" class="btn btn-primary" href="index.php?ctl=connexion&action=updatevoiture">Soumettre</button>
+            <button type="submit" class="btn btn-primary">Soumettre</button>
         </form>
     </div>
 
