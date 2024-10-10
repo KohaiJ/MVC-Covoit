@@ -17,30 +17,30 @@ switch($action){
 			break;
 			
 			case 'veriflogin':
-			
 				$email = $_POST['myEmail'];
 				$pwd = $_POST['myPassword'];
-					
-					//appel à la fonction verifLogin de Dbconnect du modele
-					$tabresult = DbConnect::verifLogin($email,$pwd);
-				
-					if($tabresult==true){
-						$_SESSION['connect'] =true;
-						$_SESSION['email'] =$email;
-						header('Location: index.php');
-						$_SESSION['nom'] = $tabresult['nom'];
-
-
-					}
-					else
-					{
-						session_destroy();
-						unset($_SESSION['connect']);
-						
 			
-					echo"<center>Identifiant ou mot de passe incorrect</center>";
-					}					
-			break;	
+				// Appel à la fonction verifLogin de DbConnect du modèle
+				$tabresult = DbConnect::verifLogin($email, $pwd);
+			
+				if ($tabresult['success'] == true) {
+					// Si les identifiants sont corrects, on crée une session et redirige
+					$_SESSION['connect'] = true;
+					$_SESSION['email'] = $email;
+					$_SESSION['nom'] = $tabresult['nom']; // Stocke le nom de l'utilisateur dans la session
+			
+					header('Location: index.php'); // Redirection vers la page principale
+					exit();
+				} else {
+					// Si les identifiants sont incorrects, afficher le formulaire avec un message d'erreur
+					session_destroy();
+					unset($_SESSION['connect']);
+			
+					// Définit une variable d'erreur basée sur le message retourné par verifLogin
+					$erreur = $tabresult['message'];
+					include 'vue/vueConnexion/v_form_connexion.php';
+				}
+				break;	
 			
 
 			case 'forgotpassword' :

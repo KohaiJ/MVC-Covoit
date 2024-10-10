@@ -19,7 +19,7 @@ if (isset($_GET['ctl'])) {
 if (!isset($_GET['ctl'])) {
     // Si l'utilisateur est connecté, on affiche la page d'accueil
     if (isset($_SESSION['connect']) && $_SESSION['connect'] === true) {
-        include 'vue/vueConnexion/v_form_connexion.php'; // Inclure la page d'accueil
+        include 'vue/body.php'; // Inclure la page d'accueil
     } else {
         // Sinon, on affiche le formulaire de connexion
         include 'vue/vueConnexion/v_form_connexion.php';
