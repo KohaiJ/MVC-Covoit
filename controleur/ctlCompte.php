@@ -6,11 +6,7 @@ switch($action){
 
 			case 'compte':
                 include 'vue/vueCompte/v_form_compte.php';
-
-
-            
-
-            case 'updatevoiture' :
+                break;
               
 }
 ?>
