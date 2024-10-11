@@ -26,16 +26,23 @@
           <!-- Vérification de la connexion de l'utilisateur -->
           <?php if (isset($_SESSION['connect']) && $_SESSION['connect'] === true): ?>
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="#">Accueil</a>
+              <a class="nav-link active" aria-current="page" href="index.php">Accueil</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="index.php?ctl=compte&action=compte">Voiture</a>
+              <a class="nav-link" href="index.php?ctl=trajet&action=recherche">Trajet</a>
             </li>
+            <?php if (isset($_SESSION['vehicule']) && $_SESSION['vehicule'] == 1) : ?>
+              <li class="nav-item">
+                  <a class="nav-link" href="index.php?ctl=voiture&action=voiture">Voiture</a>
+              </li>
+            <?php endif; ?>
+            <?php if (isset($_SESSION['vehicule']) && $_SESSION['vehicule'] == 1) : ?>
+              <li class="nav-item">
+                  <a class="nav-link" href="index.php?ctl=trajet&action=ajouterTrajet">Ajouter Trajet</a>
+              </li>
+            <?php endif; ?>
             <li class="nav-item">
-              <a class="nav-link" href="#">Conduite</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="index.php?action=compte">Compte</a>
+              <a class="nav-link" href="index.php?ctl=compte&action=compte">Compte</a>
             </li>
           <?php endif; ?>
         </ul>

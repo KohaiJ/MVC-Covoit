@@ -8,9 +8,16 @@ if (isset($_GET['ctl'])) {
         case 'connexion':
             include 'controleur/ctlConnexion.php';
             break;
+        case 'voiture':
+            include 'controleur/ctlVoiture.php';
+            break;
+        case 'trajet':
+            include 'controleur/ctlTrajet.php';
+            break;
         case 'compte':
             include 'controleur/ctlCompte.php';
-            break;
+            break; 
+         
         // Ajoutez d'autres contrôleurs si nécessaire
     }
 }

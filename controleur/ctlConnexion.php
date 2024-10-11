@@ -27,7 +27,10 @@ switch($action){
 					// Si les identifiants sont corrects, on crée une session et redirige
 					$_SESSION['connect'] = true;
 					$_SESSION['email'] = $email;
-					$_SESSION['nom'] = $tabresult['nom']; // Stocke le nom de l'utilisateur dans la session
+					$_SESSION['nom'] = $tabresult['row']['nom']; 
+					$_SESSION['id'] = $tabresult['row']['id'];
+					$_SESSION['vehicule'] = $tabresult['row']['vehicule'];
+					// Stocke le nom de l'utilisateur dans la session
 			
 					header('Location: index.php'); // Redirection vers la page principale
 					exit();

@@ -10,7 +10,7 @@ class DbConnect {
         $conn = MySqlDb::getPdoDb();
         
         // Requête pour obtenir les informations de l'utilisateur (y compris le mot de passe haché)
-        $sql = "SELECT nom, mdp FROM etudiant WHERE email = :email"; // 'nom' correspond au champ du nom dans votre base de données
+        $sql = "SELECT * FROM etudiant WHERE email = :email"; // 'nom' correspond au champ du nom dans votre base de données
         $stmt = $conn->prepare($sql);
         $stmt->bindParam(':email', $email);
         $stmt->execute();
@@ -25,7 +25,7 @@ class DbConnect {
             if (password_verify($pwd, $hashedPassword)) {
                 return [
                     'success' => true,
-                    'nom' => $nom  // Retourner le nom si la connexion est réussie
+                    'row' => $row  // Retourner le nom si la connexion est réussie
                 ];
             } else {
                 return [
