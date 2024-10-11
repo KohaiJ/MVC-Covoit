@@ -61,6 +61,21 @@ if ($voitures === false) {
     }
 }
 
+if (isset($_GET['action']) && $_GET['action'] === 'supprimerVoiture') {
+    $idVoiture = $_GET['id']; // Récupérer l'ID de la voiture à supprimer
+
+    // Appeler la méthode pour supprimer la voiture
+    if (DbCompte::supprimerVoiture($idVoiture)) {
+        echo "<center>Voiture supprimée avec succès.</center>";
+    } else {
+        echo "<center>Erreur lors de la suppression de la voiture.</center>";
+    }
+
+    // Rediriger vers la page des comptes
+    header('Location: index.php?ctl=compte&action=compte');
+    exit;
+}
+
 // Inclure la vue pour afficher les informations du compte
 include 'vue/vueCompte/v_compte.php';
 

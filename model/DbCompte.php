@@ -40,6 +40,15 @@ class DbCompte {
     
         return $stmt->fetchAll(PDO::FETCH_ASSOC); // Retourne toutes les voitures de l'étudiant
     }
+
+    public static function supprimerVoiture($idVoiture) {
+        $conn = MySqlDb::getPdoDb();
+        $sql = "DELETE FROM voiture WHERE id = :id";
+        $stmt = $conn->prepare($sql);
+        $stmt->bindParam(':id', $idVoiture);
+        return $stmt->execute(); // Renvoie vrai si la suppression a réussi, faux sinon
+    }
+    
 }
 
 ?>

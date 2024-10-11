@@ -40,8 +40,9 @@
                 <div class="col-md-4 mb-3">
                     <div class="card">
                         <div class="card-body">
-                            <h5 class="card-title"><strong>Marque :</strong><?= htmlspecialchars($voiture['marque']) ?></h5>
+                            <h5 class="card-title"><strong>Marque :</strong> <?= htmlspecialchars($voiture['marque']) ?></h5>
                             <p class="card-text"><strong>Modèle :</strong> <?= htmlspecialchars($voiture['modele']) ?></p>
+                            <a href="index.php?ctl=compte&action=supprimerVoiture&id=<?= $voiture['id'] ?>" class="btn btn-danger" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette voiture ?');">Supprimer</a>
                         </div>
                     </div>
                 </div>
@@ -55,5 +56,3 @@
         <?php endif; ?>
     </div>
 </div>
-
-
