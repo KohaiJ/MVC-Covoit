@@ -5,9 +5,9 @@
       <div class="col-md-4">
         <h5>Contact</h5>
         <ul class="list-unstyled">
-          <li><i class="fas fa-map-marker-alt"></i> 123 Rue de l'Auto-école, Paris</li>
+          <li><i class="fas fa-map-marker-alt"></i> 123 Rue de SaintAs, Melun</li>
           <li><i class="fas fa-phone"></i> +33 1 23 45 67 89</li>
-          <li><i class="fas fa-envelope"></i> contact@auto-ecole.com</li>
+          <li><i class="fas fa-envelope"></i> contact@saintas.com</li>
         </ul>
       </div>
 
@@ -15,10 +15,9 @@
       <div class="col-md-4">
         <h5>Liens Utiles</h5>
         <ul class="list-unstyled">
-          <li><a href="#" class="text-light">Accueil</a></li>
-          <li><a href="#" class="text-light">Code</a></li>
-          <li><a href="#" class="text-light">Conduite</a></li>
-          <li><a href="#" class="text-light">Contact</a></li>
+          <li><a href="index.php" class="text-light">Accueil</a></li>
+          <li><a href="index.php?ctl=compte&action=compte" class="text-light">Compte</a></li>
+          <li><a href="index.php?ctl=trajet&action=recherche" class="text-light">Trajets</a></li>
         </ul>
       </div>
 
@@ -34,7 +33,7 @@
     <!-- Copyright -->
     <div class="row mt-4">
       <div class="col text-center">
-        <p class="mb-0">&copy; 2024 Auto-école. Tous droits réservés.</p>
+        <p class="mb-0">&copy; 2024 SaintAs-Covoit. Tous droits réservés.</p>
       </div>
     </div>
   </div>
