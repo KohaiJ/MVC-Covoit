@@ -1,3 +1,6 @@
+<!DOCTYPE html>
+<html lang="fr">
+
 <div class="container-fluid mt-5">
     <div class="card mx-auto text-center" style="width: 50%;">
         <div class="card-header">
@@ -18,12 +21,17 @@
 		<input type="text" name="recoverEmail" class="form-control" placeholder="Email pour récupérer le mot de passe" required>
 		<button type="submit" class="mt-1 btn btn-secondary pb-2">Mot de passe oublié ?</button>
 	</div>
-    <div class="container">
-    <!-- Texte cliquable avec une marge en haut -->
-    <a href="#" class="mt-3 d-block text-decoration-none text-primary">
-      Cliquez ici pour changer votre mot de passe 
-    </a>
-  </div>
+
+    <?php if (isset($_SESSION['connect']) && $_SESSION['connect'] === true): ?>
+        <!-- Texte cliquable avec une marge en haut -->
+        <div class="container">
+        <a href="index.php?ctl=connexion&action=vuechangepasswd" class="mt-3 d-block text-decoration-none text-primary">
+        Cliquez ici pour changer votre mot de passe 
+        </a>
+        </div>
+    <?php endif; ?>
+
+    
 </form>
     </div>
 

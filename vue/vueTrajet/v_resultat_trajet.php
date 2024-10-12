@@ -13,7 +13,7 @@
             <?php foreach ($trajets as $trajet): ?>
             <tr>
                 <td><?php echo htmlspecialchars($trajet['LieuDepart']); ?></td>
-                <td><?php echo htmlspecialchars($trajet['LieuArrivee']); ?></td>
+                <td><?php echo htmlspecialchars($trajet['LieuArrive']); ?></td>
                 <td><?php echo htmlspecialchars($trajet['DateTrajet']); ?></td>
                 <td><?php echo htmlspecialchars($trajet['heureDepart']); ?></td>
             </tr>

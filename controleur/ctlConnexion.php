@@ -65,6 +65,49 @@ switch($action){
 				}
 			break;
 
+
+			case 'changepasswd':
+				// Vérifier si l'utilisateur est connecté et a soumis le formulaire de changement de mot de passe
+				if (isset($_SESSION['connect']) && isset($_POST['old_password']) && isset($_POST['new_password']))
+				{
+				
+					$email = $_SESSION['email'];
+	
+					$pwd = $_POST['old_password'];
+					$new_password = $_POST['new_password'];
+					
+					
+				
+				    // Appel à la fonction verifLogin de DbConnect du modèle
+					$tabresult = DbConnect::verifLogin($email, $pwd);
+					// Supposons que $tabresult est le tableau que tu veux afficher
+					
+
+					
+					if ($tabresult['success'] == true) 
+					{
+
+   				 		
+						$hashedPassword = password_hash($new_password, PASSWORD_BCRYPT);
+
+						$result = DbConnect::updatePassword($email, $hashedPassword);
+						echo "<center>Mot de passe changé avec succès.</center>";
+						
+
+						
+					} 
+					else 
+					{
+						echo "Mot de passe incorrect ou utilisateur introuvable";
+					}
+			    }		
+			break;
+
+
+			case 'vuechangepasswd':
+				include 'vue/vueConnexion/v_form_changepasswd.php';
+			break;
+			
 			
 
 

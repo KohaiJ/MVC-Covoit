@@ -81,5 +81,22 @@ class DbConnect {
             $stmt->bindParam(':email', $email);
             $stmt->execute();
     }
+
+
+
+
+    public static function getUserByEmail($email) {
+        $conn = MySqlDb::getPdoDb();
+        $sql = "SELECT email, mdp FROM etudiant WHERE email = :email";
+        $stmt = $conn->prepare($sql);
+        $stmt->bindParam(':email', $email);
+        $stmt->execute();
+        
+        // Retourne un tableau contenant les informations de l'utilisateur, y compris le mot de passe hashé
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+    
+
+
 }
     

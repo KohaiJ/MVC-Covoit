@@ -11,7 +11,7 @@ switch ($action) {
 
     case 'chercher':
         $depart = $_POST['depart'];
-        $arrivee = $_POST['arrivee'];
+        $arrivee = $_POST['arrive'];
         $date = $_POST['date'];
         $heureActuelle = date('H:i');
         $trajets = DbTrajet::chercherTrajets($depart, $arrivee, $date, $heureActuelle);

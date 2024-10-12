@@ -8,6 +8,14 @@
             <p><strong>Email :</strong> <?= htmlspecialchars($compte['email']) ?></p>
             <p><strong>Classe :</strong> <?= htmlspecialchars($compte['classe']) ?></p>
             <p><strong>Possède une voiture :</strong> <?= $compte['vehicule'] ? 'Oui' : 'Non' ?></p>
+            <strong>Mot de passe :</strong> 
+            
+<?php if (isset($_SESSION['connect']) && $_SESSION['connect'] === true): ?>
+    <a href="index.php?ctl=connexion&action=vuechangepasswd" class="text-decoration-underline text-primary">
+        Cliquez ici pour changer votre mot de passe
+    </a>
+<?php endif; ?>
+
             <!-- Ajouter d'autres informations si nécessaire -->
         </div>
     </div>

@@ -15,7 +15,7 @@ $voitures = DbCompte::getVoituresByIdEtudiant($idEtudiant);
 if ($voitures === false) {
     echo "Erreur lors de la récupération des voitures.";
 } elseif (empty($voitures)) {
-    echo "Aucune voiture trouvée pour cet étudiant.";
+    //echo "Aucune voiture trouvée pour cet étudiant.";
 } else {
     // Préparez les données pour les afficher
     $infosVoitures = [];
@@ -49,7 +49,7 @@ $voitures = DbCompte::getVoituresByIdEtudiant($idEtudiant);
 if ($voitures === false) {
     echo "Erreur lors de la récupération des voitures.";
 } elseif (empty($voitures)) {
-    echo "Aucune voiture trouvée pour cet étudiant.";
+    //echo "Aucune voiture trouvée pour cet étudiant.";
 } else {
     // Préparez les données pour les afficher
     $infosVoitures = [];
