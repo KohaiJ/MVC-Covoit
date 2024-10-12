@@ -1,3 +1,4 @@
+<?php if (isset($_SESSION['vehicule']) && $_SESSION['vehicule'] == 1) : ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,7 +11,7 @@
         <h1>Ajouter un Véhicule</h1>
         <div class="card mt-3">
             <div class="card-body">
-                <form method="POST" action="index.php?ctl=voiture&action=ajouterVoiture">
+                <form method="POST" action="index.php?ctl=voiture">
                     <div class="custom-select mb-3">
                         <label for="marque">Marque :</label>
                         <select name="marque" id="marque" class="form-control" required>
@@ -46,3 +47,4 @@
     </div>
 </body>
 </html>
+<?php endif; ?>
