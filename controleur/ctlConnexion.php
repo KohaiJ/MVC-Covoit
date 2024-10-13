@@ -30,6 +30,7 @@ switch($action){
 					$_SESSION['nom'] = $tabresult['row']['nom']; 
 					$_SESSION['id'] = $tabresult['row']['id'];
 					$_SESSION['vehicule'] = $tabresult['row']['vehicule'];
+					$_SESSION['administrateur'] = $tabresult['row']['administrateur'];
 					// Stocke le nom de l'utilisateur dans la session
 			
 					header('Location: index.php'); // Redirection vers la page principale
@@ -93,7 +94,7 @@ switch($action){
 						$result = DbConnect::updatePassword($email, $hashedPassword);
 						echo "<center>Mot de passe changé avec succès.</center>";
 						
-
+						
 						
 					} 
 					else 

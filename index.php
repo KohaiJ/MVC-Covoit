@@ -17,6 +17,9 @@ if (isset($_GET['ctl'])) {
         case 'compte':
             include 'controleur/ctlCompte.php';
             break; 
+        case 'Import':
+            include 'controleur/ctlImport.php';
+            break;
          
         // Ajoutez d'autres contrôleurs si nécessaire
     }

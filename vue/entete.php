@@ -45,6 +45,11 @@
               <a class="nav-link" href="index.php?ctl=compte&action=compte">Compte</a>
             </li>
           <?php endif; ?>
+          <?php if (isset($_SESSION['administrateur']) && $_SESSION['administrateur'] == 1) : ?> <!--A changer pour admin -->
+            <li class="nav-item">
+              <a class="nav-link" href="index.php?ctl=Import&action=afficherImport">Import(admin)</a>
+            </li>
+          <?php endif; ?>
         </ul>
         <!-- Affichage du nom de l'utilisateur connecté -->
         <ul class="navbar-nav ms-auto">
