@@ -46,11 +46,16 @@
         <?php if (!empty($voitures)): ?>
             <?php foreach ($voitures as $voiture): ?>
                 <div class="col-md-4 mb-3">
-                    <div class="card">
+                    <div class="card position-relative">
+                        <a href="index.php?ctl=compte&action=supprimerVoiture&id=<?= $voiture['id'] ?>"
+                           class="btn btn-danger btn-sm position-absolute"
+                           style="top: 10px; right: 10px;"
+                           onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette voiture ?');">
+                            <i class="fas fa-trash"></i>
+                        </a>
                         <div class="card-body">
                             <h5 class="card-title"><strong>Marque :</strong> <?= htmlspecialchars($voiture['marque']) ?></h5>
                             <p class="card-text"><strong>Modèle :</strong> <?= htmlspecialchars($voiture['modele']) ?></p>
-                            <a href="index.php?ctl=compte&action=supprimerVoiture&id=<?= $voiture['id'] ?>" class="btn btn-danger" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette voiture ?');">Supprimer</a>
                         </div>
                     </div>
                 </div>
