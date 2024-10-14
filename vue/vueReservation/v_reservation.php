@@ -7,7 +7,7 @@
                 <th>Lieu d'arrivée</th>
                 <th>Date du trajet</th>
                 <th>Heure de Départ</th>
-                <th>Actions</th>
+                <th>Action</th>
             </tr>
         </thead>
         <tbody>
@@ -18,7 +18,8 @@
                 <td><?php echo htmlspecialchars($trajet['DateTrajet']); ?></td>
                 <td><?php echo htmlspecialchars($trajet['heureDepart']); ?></td>
                 <td>
-                    <a href="index.php?ctl=reservation&action=details&id=<?= $trajet['id'] ?>" class="btn btn-primary">Réserver</a>
+                    <a href="index.php?ctl=reservation&action=reserverTrajet&idTrajet=<?= $trajet['idTrajet'] ?>" 
+                       class="btn btn-primary">Réserver</a>
                 </td>
             </tr>
             <?php endforeach; ?>

@@ -20,7 +20,12 @@ if (isset($_GET['ctl'])) {
         case 'Import':
             include 'controleur/ctlImport.php';
             break;
-         
+            case 'reservation':
+                require './controleur/ctlReservation.php';
+                if ($_GET['action'] == 'reserverTrajet') {
+                    ctlReservation::reserverTrajet();
+                }
+                break;
         // Ajoutez d'autres contrôleurs si nécessaire
     }
 }

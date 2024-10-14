@@ -48,9 +48,5 @@ switch ($action) {
         }
         break;
 
-    default:
-        // Rediriger vers une page par défaut ou une erreur
-        include 'vue/v_form_trajet.php';
-        break;
 }
 ?>

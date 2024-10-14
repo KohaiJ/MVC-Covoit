@@ -33,7 +33,7 @@
             </li>
             <?php if (isset($_SESSION['vehicule']) && $_SESSION['vehicule'] == 1) : ?>
               <li class="nav-item">
-                  <a class="nav-link" href="index.php?ctl=voiture&action=voiture">Voiture</a>
+                  <a class="nav-link" href="index.php?ctl=voiture&action=voiture">Ajouter Voiture</a>
               </li>
             <?php endif; ?>
             <?php if (isset($_SESSION['vehicule']) && $_SESSION['vehicule'] == 1) : ?>

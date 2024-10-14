@@ -3,7 +3,7 @@
   <section id="introduction">
     <div class="row">
       <div class="col-lg-12 text-center">
-        <h1>Bienvenue au SaintAs-Covoit</h1>
+        <h1>Bienvenue au Saint-Aspais Covoit</h1>
         <p class="lead">Covoiturez et économisez, tout en réduisant votre empreinte carbone.</p>
       </div>
     </div>

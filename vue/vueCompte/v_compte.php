@@ -8,19 +8,18 @@
             <p><strong>Email :</strong> <?= htmlspecialchars($compte['email']) ?></p>
             <p><strong>Classe :</strong> <?= htmlspecialchars($compte['classe']) ?></p>
             <p><strong>Possède une voiture :</strong> <?= $compte['vehicule'] ? 'Oui' : 'Non' ?></p>
-            <strong>Mot de passe :</strong> 
-            
-<?php if (isset($_SESSION['connect']) && $_SESSION['connect'] === true): ?>
-    <a href="index.php?ctl=connexion&action=vuechangepasswd" class="text-decoration-underline text-primary">
-        Cliquez ici pour changer votre mot de passe
-    </a>
-<?php endif; ?>
+            <?php if (isset($_SESSION['connect']) && $_SESSION['connect'] === true): ?>
+                <a href="index.php?ctl=connexion&action=vuechangepasswd" class="btn btn-primary">
+                    Changer votre mot de passe
+                </a>
+            <?php endif; ?>
 
             <!-- Ajouter d'autres informations si nécessaire -->
         </div>
     </div>
 </div>
 
+<?php if (empty($voitures)): ?>
 <div class="container mt-5">
     <h3 class="mb-3">Possédez-vous une voiture ?</h3>
     <div class="card">
@@ -39,33 +38,30 @@
         </div>
     </div>
 </div>
+<?php endif; ?>
 
+
+<?php if (!empty($voitures)): ?>
 <div class="container mt-5">
     <h3 class="mb-3">Informations des Voitures</h3>
     <div class="row">
-        <?php if (!empty($voitures)): ?>
-            <?php foreach ($voitures as $voiture): ?>
-                <div class="col-md-4 mb-3">
-                    <div class="card position-relative">
-                        <a href="index.php?ctl=compte&action=supprimerVoiture&id=<?= $voiture['id'] ?>"
-                           class="btn btn-danger btn-sm position-absolute"
-                           style="top: 10px; right: 10px;"
-                           onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette voiture ?');">
-                            <i class="fas fa-trash"></i>
-                        </a>
-                        <div class="card-body">
-                            <h5 class="card-title"><strong>Marque :</strong> <?= htmlspecialchars($voiture['marque']) ?></h5>
-                            <p class="card-text"><strong>Modèle :</strong> <?= htmlspecialchars($voiture['modele']) ?></p>
-                        </div>
+        <?php foreach ($voitures as $voiture): ?>
+            <div class="col-md-4 mb-3">
+                <div class="card position-relative">
+                    <a href="index.php?ctl=compte&action=supprimerVoiture&id=<?= $voiture['id'] ?>"
+                       class="btn btn-danger btn-sm position-absolute"
+                       style="top: 10px; right: 10px;"
+                       onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette voiture ?');">
+                        <i class="fas fa-trash"></i>
+                    </a>
+                    <div class="card-body">
+                        <h5 class="card-title"><strong>Marque :</strong> <?= htmlspecialchars($voiture['marque']) ?></h5>
+                        <p class="card-text"><strong>Modèle :</strong> <?= htmlspecialchars($voiture['modele']) ?></p>
                     </div>
                 </div>
-            <?php endforeach; ?>
-        <?php else: ?>
-            <div class="col-12">
-                <div class="alert alert-warning" role="alert">
-                    Aucune voiture enregistrée.
-                </div>
             </div>
-        <?php endif; ?>
+        <?php endforeach; ?>
     </div>
 </div>
+<?php endif; ?>
+
