@@ -27,6 +27,7 @@ switch ($action) {
             }
 
             $students = [];
+            $codesFichier = [];
             $students2 = [];
             $message = '';
 
@@ -42,10 +43,9 @@ switch ($action) {
                 $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
 
                 $codetest = $data[3]; // S'assurer que le code est à la bonne position
+                $codesFichier[] = $codetest; // Stocker le code pour vérification ultérieure
 
                 // Préparer l'insertion dans le tableau des étudiants
-                
-
                 $conn = MySqlDb::getPdoDb();
                 $sql1 = "SELECT * FROM etudiant WHERE code = :codetest";
                 $stmtCheck = $conn->prepare($sql1);
@@ -54,17 +54,16 @@ switch ($action) {
                 $resultCheck = $stmtCheck->fetchAll(PDO::FETCH_ASSOC);
 
                 if (count($resultCheck) == 0) {
+                    $students[] = [
+                        'code' => $codetest,
+                        'nom' => $data[0],
+                        'prenom' => $data[1],
+                        'email' => $data[2],
+                        'classe' => $data[4],
+                        'mdp' => $hashedPassword,
+                        'mdp_clair' => $password
+                    ];
 
-
-                  $students[] = [
-                    'code' => $codetest,
-                    'nom' => $data[0],
-                    'prenom' => $data[1],
-                    'email' => $data[2],
-                    'classe' => $data[4],
-                    'mdp' => $hashedPassword,
-                    'mdp_clair' => $password
-                  ];
                     // Insertion dans la base de données
                     $sql = "INSERT INTO etudiant (id, code, nom, prenom, email, classe, mdp, vehicule, idvehicule, administrateur) 
                             VALUES (NULL, :code, :nom, :prenom, :email, :classe, :mdp, 0, 0, NULL)";
@@ -77,22 +76,53 @@ switch ($action) {
                         'classe' => $data[4],
                         'mdp' => $hashedPassword
                     ])) {
-                        //$message .= "Étudiant $data[1] $data[0] ajouté avec succès.<br>";
                         $students2[] = $data;
                     }
                 }
-                
             }
-            
 
             fclose($handle);
-            if (count($students2) > 0) {
-              // Afficher les étudiants dans la vue
-              include 'vue/vueImport/v_form_import.php';
+
+            // Étape de suppression des étudiants qui ne sont pas dans le fichier
+            $sql2 = "SELECT code FROM etudiant";
+            $stmtAll = $conn->query($sql2);
+            $codesBD = $stmtAll->fetchAll(PDO::FETCH_COLUMN);
+
+            // Trouver les codes à supprimer
+            $codesASupprimer = array_diff($codesBD, $codesFichier);
+
+            // Supprimer les étudiants correspondants
+            
+
+            if (count($codesASupprimer) > 0) {
+              // Préparer la liste des placeholders
+               $placeholders = implode(',', array_fill(0, count($codesASupprimer), '?'));
+
+                // Construire la requête SQL pour supprimer les étudiants
+               $sqlDelete = "DELETE FROM etudiant WHERE code IN ($placeholders)";
+
+                 // Préparer l'instruction SQL
+               $stmtDelete = $conn->prepare($sqlDelete);
+
+                // Exécuter la requête avec les codes à supprimer
+                if ($stmtDelete->execute(array_values($codesASupprimer))) {
+                  // Afficher un message pour chaque étudiant supprimé
+                  echo "<center>Les étudiants suivants ont été supprimés :<br>";
+                  foreach ($codesASupprimer as $code) {
+                      echo "Étudiant avec le code : $code a été supprimé.<br>";
+                  }
+                  echo "</center>";
+              } else {
+                  echo "<center>Erreur lors de la suppression des étudiants.</center>";
+              }
             }
-            else
-            {
-              echo "<center>Aucun étudiant ajouté</center>";
+
+
+            if (count($students2) > 0) {
+                // Afficher les étudiants dans la vue
+                include 'vue/vueImport/v_form_import.php';
+            } else {
+                echo "<center>Aucun étudiant ajouté</center>";
             }
         } else {
             die("<center>Erreur lors du téléchargement du fichier.</center>");

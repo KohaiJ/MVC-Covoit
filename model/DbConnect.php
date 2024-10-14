@@ -20,7 +20,7 @@ class DbConnect {
             $row = $stmt->fetch(PDO::FETCH_ASSOC);
             $hashedPassword = $row['mdp'];
             $nom = $row['nom'];  // Récupérer le nom de l'utilisateur
-            $idEtudiant = $row['id']
+            $idEtudiant = $row['id'];
             
             // Vérification du mot de passe avec password_verify
             if (password_verify($pwd, $hashedPassword)) {
