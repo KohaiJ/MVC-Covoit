@@ -118,8 +118,67 @@
     </tbody>
 </table>
 
-<?php else: ?>
-    <p>Aucun trajet trouvé.</p>
+
+<?php endif; ?>
+
+
+
+
+
+
+<?php if (!empty($reservations)): ?>
+<div class="container mt-5">
+    <h3 class="text-center mb-4">Informations des Réservations</h3>
+    <!--<div class="d-flex justify-content-center">
+        <div class="mx-2">
+            <a href="index.php?ctl=compteTrajets&action=vuedestrajets" class="btn btn-primary btn-lg">
+                Afficher vos trajets
+            </a>
+        </div>
+        <div class="mx-2">
+            <a href="index.php?ctl=compteTrajets&action=" class="btn btn-primary btn-lg">
+                Afficher vos réservations
+            </a>
+        </div>
+    </div>-->
+</div>
+<?php endif; ?>
+
+<?php if (!empty($reservations)): ?>
+    <table style="width: 100%; border-collapse: collapse; margin: 20px 0;">
+    <thead>
+        <tr>
+            <th>idEtudiant</th>
+            <th>Id Trajet</th>
+            <th>Etat</th>
+           
+        </tr>
+    </thead>
+    <tbody>
+        <?php foreach ($reservations as $index => $reservation): ?>
+            <tr style="background-color: <?php echo $index % 2 == 0 ? '#f2f2f2' : 'white'; ?>;">
+                <td><?php echo htmlspecialchars($reservation['idEtudiant']); ?></td>
+                <td><?php echo htmlspecialchars($reservation['idTrajet']); ?></td>
+                <td><?php echo htmlspecialchars($reservation['etat']); ?></td>
+               
+                
+              
+                <td>
+                <div class="card position-relative">
+                    <a href="index.php?ctl=compteTrajets&action=supprimerReservation&idTrajet=<?= $reservation['idTrajet'] ?>"
+                       class="btn btn-danger position-absolute"
+                       
+                        onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette réservation ?');">
+                        <i class="fas fa-trash"></i>
+                    </a>
+                    <div class="card-body">
+                </td>
+            </tr>
+        <?php endforeach; ?>
+    </tbody>
+</table>
+
+
 <?php endif; ?>
 
 

@@ -15,12 +15,17 @@ switch($action){
         
         break;
 
-}
+
 
     case 'supprimerReservation':
-        $idReservation = $_GET['id'];
-        DbReservation::supprimerReservation($idReservation);
+        
+
+
+        $idTrajetreservation = $_GET['idTrajet'];  
+        DbTrajet::supprimerReservation($idTrajetreservation);
         echo "<center>La réservation a été supprimée avec succès.</center>";
         break;
+
+}
 
 ?>

@@ -83,6 +83,14 @@ class DbTrajet {
         $stmt->bindParam(':id', $idTrajet);
         return $stmt->execute();
     }
+
+    public static function supprimerReservation($idtrajetreservation) {   
+        $conn = MySqlDb::getPdoDb();
+        $sql = "DELETE FROM reserver WHERE idTrajet = :idtrajetreservation";
+        $stmt = $conn->prepare($sql);
+        $stmt->bindParam(':idtrajetreservation', $idtrajetreservation);
+        return $stmt->execute();
+    }
 }
 ?>
 
