@@ -18,7 +18,7 @@
                 <td><?php echo htmlspecialchars($trajet['DateTrajet']); ?></td>
                 <td><?php echo htmlspecialchars($trajet['heureDepart']); ?></td>
                 <td>
-                    <a href="index.php?ctl=reservation&action=reserverTrajet&idTrajet=<?= $trajet['idTrajet'] ?>" 
+                    <a href="index.php?ctl=reservation&action=reserverTrajet&idTrajet=<?= $trajet['idTrajet'] ?>&idEtudiant=<?= $trajet['idEtudiant'] ?>" 
                        class="btn btn-primary">Réserver</a>
                 </td>
             </tr>

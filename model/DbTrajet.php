@@ -89,6 +89,29 @@ class DbTrajet {
         $sql = "DELETE FROM reserver WHERE idTrajet = :idtrajetreservation";
         $stmt = $conn->prepare($sql);
         $stmt->bindParam(':idtrajetreservation', $idtrajetreservation);
+        $stmt->execute();
+        $conn2 = MySqlDb::getPdoDb();
+        $sql2 = "UPDATE trajet SET places = places + 1 WHERE id = :idtrajetreservation";
+        $stmt2 = $conn2->prepare($sql2);
+        $stmt2->bindParam(':idtrajetreservation', $idtrajetreservation);
+        $stmt2->execute();
+        
+    }
+
+    public static function getNbPlace($idTrajet) {
+        $conn = MySqlDb::getPdoDb();
+        $sql = "SELECT places FROM trajet WHERE id = :id";
+        $stmt = $conn->prepare($sql);
+        $stmt->bindParam(':id', $idTrajet);
+        $stmt->execute();
+        return $stmt->fetchColumn();
+    }
+
+    public static function updateNbPlace($idTrajet) {
+        $conn = MySqlDb::getPdoDb();
+        $sql = "UPDATE trajet SET places = places - 1 WHERE id = :id";
+        $stmt = $conn->prepare($sql);
+        $stmt->bindParam(':id', $idTrajet);
         return $stmt->execute();
     }
 }

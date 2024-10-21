@@ -10,10 +10,13 @@ switch($action){
     case 'supprimerTrajet':
         $idTrajet = $_GET['id'];
         DbTrajet::supprimerTrajet($idTrajet);
-        echo "<center>Le trajet a été supprimé avec succès.</center>";
+        header("Location: index.php?ctl=compte&action=compte"); 
+        exit();
+        
+        
 
         
-        break;
+    break;
 
 
 
@@ -23,8 +26,10 @@ switch($action){
 
         $idTrajetreservation = $_GET['idTrajet'];  
         DbTrajet::supprimerReservation($idTrajetreservation);
-        echo "<center>La réservation a été supprimée avec succès.</center>";
-        break;
+        
+        header("Location: index.php?ctl=compte&action=compte"); 
+        exit();
+    break;
 
 }
 
