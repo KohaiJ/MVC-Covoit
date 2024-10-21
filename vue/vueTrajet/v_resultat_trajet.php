@@ -21,7 +21,7 @@
                 <td><?php echo htmlspecialchars($trajet['id']); ?></td>
                 <td><?php echo htmlspecialchars($trajet['places']); ?></td>
                 <td>
-                    <a href="index.php?ctl=reservation&action=reserverTrajet&id=<?= $trajet['id'] ?>" class="btn btn-primary">Réserver</a>
+                    <a href="index.php?ctl=reservation&action=reserverTrajet&id=<?= htmlspecialchars($trajet['id']) ?>&idTrajetEtudiant=<?= htmlspecialchars($trajet['idEtudiant']) ?>" class="btn btn-primary">Réserver</a>
                 </td>
             </tr>
             <?php endforeach; ?>

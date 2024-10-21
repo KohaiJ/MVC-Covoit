@@ -9,7 +9,9 @@ switch ($action) {
 
     case 'reserverTrajet':
 
-        if (isset($_GET['id']) && isset($_GET['idEtudiant']) && $_SESSION['id'] !== $_GET['idEtudiant']) {
+        
+
+        if (isset($_GET['id']) && isset($_GET['idTrajetEtudiant']) && $_SESSION['id'] !== $_GET['idTrajetEtudiant']) {
             $idTrajet = $_GET['id'];
             $trajetnbPlace = DbTrajet::getNbPlace($idTrajet);
 
@@ -55,7 +57,7 @@ switch ($action) {
             }
         }
         else{
-            echo "<center>Vous ne pouvez pas réserver votre propre trajet.</center>";
+            echo "<center>Données invalides ou vous ne pouvez pas réserver votre propre trajet.</center>";
         }
         break;
 

@@ -160,6 +160,7 @@
                 <td><?php echo htmlspecialchars($reservation['idEtudiant']); ?></td>
                 <td><?php echo htmlspecialchars($reservation['idTrajet']); ?></td>
                 <td><?php echo htmlspecialchars($reservation['etat']); ?></td>
+             
                
                 
               
