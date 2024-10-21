@@ -5,6 +5,7 @@ require_once "./model/MysqlDb.php";
 $action = $_GET['action'];
 
 switch ($action) {
+    
     case 'afficherImport':
         // Inclure la vue d'import
         include 'vue/vueImport/v_form_import.php';
@@ -66,7 +67,7 @@ switch ($action) {
 
                     // Insertion dans la base de données
                     $sql = "INSERT INTO etudiant (id, code, nom, prenom, email, classe, mdp, vehicule, idvehicule, administrateur) 
-                            VALUES (NULL, :code, :nom, :prenom, :email, :classe, :mdp, 0, 0, NULL)";
+                            VALUES (NULL, :code, :nom, :prenom, :email, :classe, :mdp, 0, NULL, NULL)";
                     $stmt = $conn->prepare($sql);
                     if ($stmt->execute([
                         'code' => $codetest,

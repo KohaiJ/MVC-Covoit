@@ -14,6 +14,17 @@ class DbVoiture {
         return $row ? $row['id'] : null; // Retourne l'ID ou null si non trouvé
     }
 
+    public static function getVoituresByIdEtudiant($idEtudiant) {
+        $conn = MySqlDb::getPdoDb();
+        $sql = "SELECT * FROM voiture WHERE idEtudiant = :idEtudiant";
+        $stmt = $conn->prepare($sql);
+        $stmt->bindParam(':idEtudiant', $idEtudiant);
+        $stmt->execute();
+        
+        return $stmt->fetchAll(PDO::FETCH_ASSOC); // Retourne toutes les voitures trouvées
+    }
+     
+    
     // Méthode pour ajouter une voiture à la base de données
     public static function ajouterVoiture($idEtudiant, $marque, $modele, $nbPlace) {
         $conn = MySqlDb::getPdoDb();

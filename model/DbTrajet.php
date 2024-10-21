@@ -21,28 +21,41 @@ class DbTrajet {
         return $stmt->fetchAll(PDO::FETCH_ASSOC); // Retourne tous les trajets trouvés
     }
     
-    public static function ajouterTrajet($lieu_depart, $lieu_arrive, $jour, $heure_depart, $id) {
-        // Connexion à la base de données via MySqlDb
+    public static function ajouterTrajet($lieu_depart, $lieu_arrive, $jour, $heure_depart, $id, $idVoiture) {
         $conn = MySqlDb::getPdoDb();
-       
-        // Requête d'insertion
-        $sql = "INSERT INTO trajet (LieuDepart, LieuArrive, DateTrajet, heureDepart, idEtudiant)
-                VALUES (:LieuDepart, :LieuArrive, :DateTrajet, :heureDepart, :id)";
+        $sql = "INSERT INTO trajet (LieuDepart, LieuArrive, DateTrajet, heureDepart, idEtudiant, idVoiture)
+                VALUES (:LieuDepart, :LieuArrive, :DateTrajet, :heureDepart, :id, :idVoiture)";
         $stmt = $conn->prepare($sql);
-       
+    
         // Lier les paramètres
         $stmt->bindParam(':LieuDepart', $lieu_depart);
         $stmt->bindParam(':LieuArrive', $lieu_arrive);
         $stmt->bindParam(':DateTrajet', $jour);
         $stmt->bindParam(':heureDepart', $heure_depart);
         $stmt->bindParam(':id', $id);
+        $stmt->bindParam(':idVoiture', $idVoiture); // Lier idVoiture
     
-       
-    
-       
-        // Exécuter la requête et retourner le résultat
         return $stmt->execute(); // Renvoie true si l'insertion a réussi, false sinon
     }
-}
 
+    public static function getTrajetById($idTrajet) {
+        $conn = MySqlDb::getPdoDb();
+        $sql = "SELECT * FROM trajet WHERE id = :id";
+        $stmt = $conn->prepare($sql);
+        $stmt->bindParam(':id', $idTrajet);
+        $stmt->execute();
+
+        return $stmt->fetch(PDO::FETCH_ASSOC); // Retourne les détails du trajet
+    }
+
+    public static function getReservationById($idEtudiant) { 
+        $conn = MySqlDb::getPdoDb();
+        $sql = "SELECT * FROM reserver";
+        $stmt = $conn->prepare($sql);
+        $stmt->bindParam(':idEtudiant', $idEtudiant);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+}
 ?>
+

@@ -1,7 +1,7 @@
 <?php
 
 class MySqlDb{
-	private static $dsn = 'mysql:dbname=covoit;host=localhost';
+	private static $dsn = 'mysql:dbname=covoit2;host=localhost';
 	private static $user = 'root';
 	private static $pwd = 'root';
 	

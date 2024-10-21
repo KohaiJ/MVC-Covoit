@@ -13,8 +13,6 @@
                     Changer votre mot de passe
                 </a>
             <?php endif; ?>
-
-            <!-- Ajouter d'autres informations si nécessaire -->
         </div>
     </div>
 </div>
@@ -40,7 +38,6 @@
 </div>
 <?php endif; ?>
 
-
 <?php if (!empty($voitures)): ?>
 <div class="container mt-5">
     <h3 class="mb-3">Informations des Voitures</h3>
@@ -65,3 +62,68 @@
 </div>
 <?php endif; ?>
 
+<!-- Section des trajets créés par l'utilisateur -->
+<?php if (!empty($trajets)): ?>
+<div class="container mt-5">
+    <h3 class="mb-3">Trajets créés</h3>
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Départ</th>
+                    <th>Arrivée</th>
+                    <th>Date</th>
+                    <th>Heure de départ</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php foreach ($trajets as $trajet): ?>
+                <tr>
+                    <td><?= htmlspecialchars($trajet['lieu_depart']) ?></td>
+                    <td><?= htmlspecialchars($trajet['lieu_arrivee']) ?></td>
+                    <td><?= htmlspecialchars($trajet['jour']) ?></td>
+                    <td><?= htmlspecialchars($trajet['heure_depart']) ?></td>
+                    <td>
+                        <a href="index.php?ctl=compte&action=supprimerTrajet&id=<?= $trajet['id'] ?>"
+                           class="btn btn-danger btn-sm"
+                           onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce trajet ?');">
+                           Supprimer
+                        </a>
+                    </td>
+                </tr>
+                <?php endforeach; ?>
+            </tbody>
+        </table>
+    </div>
+</div>
+<?php endif; ?>
+
+<!-- Section des trajets réservés -->
+<?php if (!empty($trajets_reserves)): ?>
+<div class="container mt-5">
+    <h3 class="mb-3">Trajets réservés</h3>
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Départ</th>
+                    <th>Arrivée</th>
+                    <th>Date</th>
+                    <th>Heure de départ</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php foreach ($trajets_reserves as $trajet): ?>
+                <tr>
+                    <td><?= htmlspecialchars($trajet['lieu_depart']) ?></td>
+                    <td><?= htmlspecialchars($trajet['lieu_arrivee']) ?></td>
+                    <td><?= htmlspecialchars($trajet['jour']) ?></td>
+                    <td><?= htmlspecialchars($trajet['heure_depart']) ?></td>
+                </tr>
+                <?php endforeach; ?>
+            </tbody>
+        </table>
+    </div>
+</div>
+<?php endif; ?>

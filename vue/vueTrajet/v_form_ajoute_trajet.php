@@ -36,8 +36,22 @@
                 <label class="form-label">Heure de départ</label>
                 <input type="time" class="form-control" name="heureDepart" required>
             </div>
-             <!--heure arrivé -->
-           
+            <div class="custom-select mb-3">
+                <label for="voiture">Voiture :</label>
+                <select name="voiture" id="voiture" class="form-control" required>
+                    <option value="">Sélectionnez une voiture</option> <!-- Option par défaut -->
+                    <?php if (!empty($voitures)): ?>
+                        <?php foreach ($voitures as $voiture): ?>
+                            <option value="<?= htmlspecialchars($voiture['id']) ?>">
+                                <?= htmlspecialchars($voiture['marque']) . ' ' . htmlspecialchars($voiture['modele']) ?>
+                            </option>
+                        <?php endforeach; ?>
+                    <?php else: ?>
+                        <option value="">Aucune voiture disponible</option>
+                    <?php endif; ?>
+                </select>
+            </div>
+
             <button type="submit" class="btn btn-primary">Soumettre</button>
         </form>
     </div>
