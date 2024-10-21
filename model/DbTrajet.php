@@ -21,10 +21,10 @@ class DbTrajet {
         return $stmt->fetchAll(PDO::FETCH_ASSOC); // Retourne tous les trajets trouvés
     }
     
-    public static function ajouterTrajet($lieu_depart, $lieu_arrive, $jour, $heure_depart, $id, $idVoiture) {
+    public static function ajouterTrajet($lieu_depart, $lieu_arrive, $jour, $heure_depart, $id, $places, $idVoiture) {
         $conn = MySqlDb::getPdoDb();
-        $sql = "INSERT INTO trajet (LieuDepart, LieuArrive, DateTrajet, heureDepart, idEtudiant, idVoiture)
-                VALUES (:LieuDepart, :LieuArrive, :DateTrajet, :heureDepart, :id, :idVoiture)";
+        $sql = "INSERT INTO trajet (LieuDepart, LieuArrive, DateTrajet, heureDepart, idEtudiant, places, idVoiture)
+                VALUES (:LieuDepart, :LieuArrive, :DateTrajet, :heureDepart, :id, :places, :idVoiture)";
         $stmt = $conn->prepare($sql);
     
         // Lier les paramètres
@@ -33,6 +33,7 @@ class DbTrajet {
         $stmt->bindParam(':DateTrajet', $jour);
         $stmt->bindParam(':heureDepart', $heure_depart);
         $stmt->bindParam(':id', $id);
+        $stmt->bindParam(':places', $places);
         $stmt->bindParam(':idVoiture', $idVoiture); // Lier idVoiture
     
         return $stmt->execute(); // Renvoie true si l'insertion a réussi, false sinon

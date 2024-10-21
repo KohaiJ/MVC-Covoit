@@ -33,10 +33,11 @@ switch ($action) {
             $jour = $_POST['DateTrajet'];
             $heure_depart = $_POST['heureDepart'];
             $id = $_SESSION['id'];
+            $places = $_POST['nbPlace'];
             $idVoiture = $_POST['voiture']; // Récupérer l'id de la voiture sélectionnée
     
             // Appeler la méthode pour ajouter le trajet
-            $result = DbTrajet::ajouterTrajet($lieu_depart, $lieu_arrive, $jour, $heure_depart, $id, $idVoiture); // Mettez à jour cette méthode
+            $result = DbTrajet::ajouterTrajet($lieu_depart, $lieu_arrive, $jour, $heure_depart, $id, $places, $idVoiture); // Mettez à jour cette méthode
     
             // Afficher un message en fonction du résultat
             if ($result) {

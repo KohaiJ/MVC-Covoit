@@ -38,24 +38,47 @@
             </div>
             <div class="custom-select mb-3">
                 <label for="voiture">Voiture :</label>
-                <select name="voiture" id="voiture" class="form-control" required>
-                    <option value="">Sélectionnez une voiture</option> <!-- Option par défaut -->
-                    <?php if (!empty($voitures)): ?>
-                        <?php foreach ($voitures as $voiture): ?>
-                            <option value="<?= htmlspecialchars($voiture['id']) ?>">
-                                <?= htmlspecialchars($voiture['marque']) . ' ' . htmlspecialchars($voiture['modele']) ?>
-                            </option>
-                        <?php endforeach; ?>
-                    <?php else: ?>
-                        <option value="">Aucune voiture disponible</option>
-                    <?php endif; ?>
-                </select>
-            </div>
+                     <select name="voiture" id="voiture" class="form-control" onchange="updatePlaces()" required>
+                          <option value="">Sélectionnez une voiture</option> <!-- Option par défaut -->
+                            <?php if (!empty($voitures)): ?>
+                              <?php foreach ($voitures as $voiture): ?>
+                                   <option value="<?= htmlspecialchars($voiture['id']) ?>" data-places="<?= htmlspecialchars($voiture['nbPlace']) ?>">
+                                         <?= htmlspecialchars($voiture['marque']) . ' ' . htmlspecialchars($voiture['modele']). ' / nombre de places : ' . htmlspecialchars($voiture['nbPlace']) ?>
+                                    </option>
+                                <?php endforeach; ?>
+                            <?php else: ?>
+                             <option value="">Aucune voiture disponible</option>
+                            <?php endif; ?>
+                    </select>
+        </div>
 
-            <button type="submit" class="btn btn-primary">Soumettre</button>
-        </form>
-    </div>
- 
+        <div class="mb-3">
+            <label for="places">Places disponibles :</label>
+            <input type="number" class="form-control" id="places" name="nbPlace" min="1" required>
+        </div>
+
+<button type="submit" class="btn btn-primary">Soumettre</button>
+
+<script>
+function updatePlaces() {
+    // Récupère l'élément select voiture et le champ des places
+    const voitureSelect = document.getElementById('voiture');
+    const placesInput = document.getElementById('places');
+
+    // Récupère l'option sélectionnée et le nombre de places via l'attribut data-places
+    const selectedOption = voitureSelect.options[voitureSelect.selectedIndex];
+    const placesVoiture = selectedOption.getAttribute('data-places');
+
+    // Si une voiture est sélectionnée, soustrait 1 place pour le conducteur
+    if (placesVoiture) {
+        const placesDisponibles = Math.max(1, placesVoiture - 1); 
+        placesInput.value = placesDisponibles; // Mise à jour du champ "places"
+    } else {
+        placesInput.value = ''; // Réinitialiser si aucune voiture n'est sélectionnée
+    }
+}
+</script>
+
     <script src="https://openlayers.org/en/v6.6.1/build/ol.js" type="text/javascript"></script>
     <script>
         // Initialisation de la carte
