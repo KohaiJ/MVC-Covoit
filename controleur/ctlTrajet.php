@@ -1,9 +1,12 @@
 <?php
 include './model/DbTrajet.php';
-include './model/DbVoiture.php'; // Ajoutez l'importation de DbVoiture
+include './model/DbVoiture.php';
+ // Ajoutez l'importation de DbVoiture
 date_default_timezone_set('Europe/Paris'); 
 
+
 $action = $_GET['action'];
+
 
 switch ($action) {
     case 'recherche':
@@ -15,6 +18,8 @@ switch ($action) {
         $arrivee = $_POST['arrive'];
         $date = date('Y-m-d');
         $heureActuelle = date('H:i');
+        
+        
         $trajets = DbTrajet::chercherTrajets($depart, $arrivee, $date, $heureActuelle);
         include 'vue/vueTrajet/v_resultat_trajet.php';
         break;
@@ -50,6 +55,7 @@ switch ($action) {
             echo "<center>Veuillez soumettre le formulaire.</center>";
         }
         break;
-        
+
+    
 }
 ?>

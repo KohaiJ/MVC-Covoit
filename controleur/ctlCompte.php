@@ -2,15 +2,18 @@
 
 include './model/DbCompte.php'; // Inclure le modèle
 include './model/DbVoiture.php';
+include './model/DbTrajet.php';
 
 // Récupérer l'email de l'utilisateur connecté depuis la session
 $email = $_SESSION['email'];
+$idEtudiant = $_SESSION['id'];
 
 // Récupérer les informations du compte via le modèle
 $compte = DbCompte::getCompteByEmail($email);
 $idEtudiant = DbVoiture::getIdEtudiantByEmail($email);
 $voitures = DbCompte::getVoituresByIdEtudiant($idEtudiant);
-
+$trajets = DbTrajet::getTrajetByUserId($idEtudiant);
+$reservations = DbTrajet::getReservationsByUserId($idEtudiant);
 // Vérifiez si les voitures sont récupérées
 if ($voitures === false) {
     echo "Erreur lors de la récupération des voitures.";

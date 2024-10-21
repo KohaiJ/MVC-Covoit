@@ -15,7 +15,7 @@ class DbTrajet {
         $stmt->bindParam(':arrive', $arrive);
         $stmt->bindParam(':date', $date);
         $stmt->bindParam(':heureActuelle', $heureActuelle);
-
+      
         $stmt->execute();
 
         return $stmt->fetchAll(PDO::FETCH_ASSOC); // Retourne tous les trajets trouvés
@@ -56,6 +56,32 @@ class DbTrajet {
         $stmt->bindParam(':idEtudiant', $idEtudiant);
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public static function getTrajetByUserId($idEtudiant) {
+        $conn = MySqlDb::getPdoDb();
+        $sql = "SELECT * FROM trajet WHERE idEtudiant = :idEtudiant";
+        $stmt = $conn->prepare($sql);
+        $stmt->bindParam(':idEtudiant', $idEtudiant);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public static function getReservationsByUserId($idEtudiant) {
+        $conn = MySqlDb::getPdoDb();
+        $sql = "SELECT * FROM reserver WHERE idEtudiant = :idEtudiant";
+        $stmt = $conn->prepare($sql);
+        $stmt->bindParam(':idEtudiant', $idEtudiant);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public static function supprimerTrajet($idTrajet) {
+        $conn = MySqlDb::getPdoDb();
+        $sql = "DELETE FROM trajet WHERE id = :id";
+        $stmt = $conn->prepare($sql);
+        $stmt->bindParam(':id', $idTrajet);
+        return $stmt->execute();
     }
 }
 ?>
