@@ -62,7 +62,7 @@
 </div>
 <?php endif; ?>
 
-<?php if (!empty($trajets)): ?>
+<?php if (!empty($trajets && !empty($voitures))): ?>
 <div class="container mt-5">
     <h3 class="text-center mb-4">Informations des Trajets</h3>
     <!--<div class="d-flex justify-content-center">
@@ -80,7 +80,7 @@
 </div>
 <?php endif; ?>
 
-<?php if (!empty($trajets)): ?>
+<?php if (!empty($trajets && !empty($voitures))): ?>
     <table style="width: 100%; border-collapse: collapse; margin: 20px 0;">
     <thead>
         <tr>
