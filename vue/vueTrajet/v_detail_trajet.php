@@ -14,7 +14,7 @@ setlocale(LC_TIME, 'fr_FR.UTF-8', 'fra');
                     <div class="d-flex justify-content-between align-items-center mb-3">
                         <h5 class="card-title mb-0">
                             <i class="bi bi-person-circle me-2"></i>
-                            <?php echo htmlspecialchars($trajet['nomE']); ?>
+                            <?php echo htmlspecialchars($trajet['nomEtudiant']); ?>
                         </h5>
                         <span class="badge bg-dark text-white rounded-pill p-2">
                             <i class="bi bi-person-fill"></i>

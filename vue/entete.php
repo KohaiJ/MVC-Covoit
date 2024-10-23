@@ -38,16 +38,15 @@
                   <a class="nav-link" href="index.php?ctl=voiture&action=voiture">Ajouter Voiture</a>
               </li>
             <?php endif; ?>
-            <?php if (isset($_SESSION['vehicule']) && $_SESSION['vehicule'] == 1) : ?>
-              <li class="nav-item">
-                  <a class="nav-link" href="index.php?ctl=trajet&action=ajouterTrajet">Ajouter Trajet</a>
-              </li>
-            <?php endif; ?>
+            <!-- Nouveau bouton "Mes trajets" -->
+            <li class="nav-item">
+              <a class="nav-link" href="index.php?ctl=compteTrajets&action=mesTrajets">Mes trajets</a>
+            </li>
             <li class="nav-item">
               <a class="nav-link" href="index.php?ctl=compte&action=compte">Compte</a>
             </li>
           <?php endif; ?>
-          <?php if (isset($_SESSION['administrateur']) && $_SESSION['administrateur'] == 1) : ?> <!--A changer pour admin -->
+          <?php if (isset($_SESSION['administrateur']) && $_SESSION['administrateur'] == 1) : ?>
             <li class="nav-item">
               <a class="nav-link" href="index.php?ctl=Import&action=afficherImport">Import(admin)</a>
             </li>
