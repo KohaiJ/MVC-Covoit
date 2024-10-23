@@ -49,10 +49,9 @@ function ucfirst_utf8($str) {
                         </div>
                         <span><?php echo ucfirst_utf8(htmlspecialchars($trajet['LieuArrive'])); ?></span>
                     </div>
-                    
                     <!-- Bouton pour voir les détails -->
-                    <a href="index.php?ctl=reservation&action=reserverTrajet&id=<?= $trajet['id'] ?>" class="btn btn-dark w-100 mt-3">
-                        <i class="bi bi-plus-circle me-2"></i>Voir le détail du covoiturage
+                    <a href="index.php?ctl=trajet&action=detailTrajet&id=<?= $trajet['id'] ?>" class="btn btn-dark w-100 mt-3">
+                        <i class="bi bi-eye me-2"></i>Voir le détail du covoiturage
                     </a>
                 </div>
             </div>

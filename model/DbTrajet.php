@@ -46,12 +46,27 @@ class DbTrajet {
 
     public static function getTrajetById($idTrajet) {
         $conn = MySqlDb::getPdoDb();
-        $sql = "SELECT * FROM trajet WHERE id = :id";
+        $sql = "SELECT t.*, e.nom AS nomEtudiant, e.prenom AS prenomEtudiant, 
+                   v.marque, v.modele, v.nbPlace
+            FROM trajet t
+            JOIN etudiant e ON t.idEtudiant = e.id
+            LEFT JOIN voiture v ON t.idVoiture = v.id
+            WHERE t.id = :id";
         $stmt = $conn->prepare($sql);
         $stmt->bindParam(':id', $idTrajet);
         $stmt->execute();
 
-        return $stmt->fetch(PDO::FETCH_ASSOC); // Retourne les détails du trajet
+        $trajet = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if ($trajet && $trajet['marque'] !== null) {
+            $trajet['voiture'] = [
+                'marque' => $trajet['marque'],
+                'modele' => $trajet['modele'],
+                'nbPlace' => $trajet['nbPlace']
+            ];
+        }
+
+        return $trajet;
     }
 
     public static function getReservationById($idEtudiant) { 

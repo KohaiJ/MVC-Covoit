@@ -56,6 +56,20 @@ switch ($action) {
         }
         break;
 
+    case 'detailTrajet':
+        if (isset($_GET['id'])) {
+            $idTrajet = $_GET['id'];
+            $trajet = DbTrajet::getTrajetById($idTrajet);
+            if ($trajet) {
+                include 'vue/vueTrajet/v_detail_trajet.php';
+            } else {
+                echo "Trajet non trouvé";
+            }
+        } else {
+            echo "ID de trajet non spécifié";
+        }
+        break;
+
     
 }
 ?>
