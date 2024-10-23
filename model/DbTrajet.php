@@ -5,8 +5,13 @@ class DbTrajet {
     public static function chercherTrajets($depart, $arrive, $date, $heureActuelle) {
         $conn = MySqlDb::getPdoDb();
         
-        // Correction de la requête SQL
-        $sql = "SELECT * FROM trajet WHERE LieuDepart = :depart AND LieuArrive = :arrive AND (DateTrajet > :date OR (DateTrajet = :date AND HeureDepart >= :heureActuelle)) ORDER BY DateTrajet ASC, HeureDepart ASC";
+        $sql = "SELECT t.*, e.nom AS nomEtudiant 
+                FROM trajet t
+                JOIN etudiant e ON t.idEtudiant = e.id
+                WHERE t.LieuDepart = :depart 
+                AND t.LieuArrive = :arrive 
+                AND (t.DateTrajet > :date OR (t.DateTrajet = :date AND t.heureDepart >= :heureActuelle)) 
+                ORDER BY t.DateTrajet ASC, t.heureDepart ASC";
         
         $stmt = $conn->prepare($sql);
         
@@ -85,4 +90,3 @@ class DbTrajet {
     }
 }
 ?>
-
