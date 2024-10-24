@@ -7,7 +7,6 @@ date_default_timezone_set('Europe/Paris');
 
 $action = $_GET['action'];
 
-
 switch ($action) {
     case 'recherche':
         include 'vue/vueTrajet/v_form_trajet.php';
@@ -19,6 +18,13 @@ switch ($action) {
         $date = date('Y-m-d');
         $heureActuelle = date('H:i');
         
+        // Sauvegarder les critères de recherche dans la session
+        $_SESSION['derniere_recherche'] = [
+            'depart' => $depart,
+            'arrive' => $arrivee,
+            'date' => $date,
+            'heure' => $heureActuelle
+        ];
         
         $trajets = DbTrajet::chercherTrajets($depart, $arrivee, $date, $heureActuelle);
         include 'vue/vueTrajet/v_resultat_trajet.php';
@@ -68,6 +74,24 @@ switch ($action) {
         } else {
             echo "ID de trajet non spécifié";
         }
+        break;
+
+    case 'resultatRecherche':
+        // Récupérer les critères de recherche de la session
+        if (isset($_SESSION['derniere_recherche'])) {
+            $depart = $_SESSION['derniere_recherche']['depart'];
+            $arrivee = $_SESSION['derniere_recherche']['arrive'];
+            $date = $_SESSION['derniere_recherche']['date'];
+            $heureActuelle = $_SESSION['derniere_recherche']['heure'];
+        } else {
+            // Si pas de recherche précédente, rediriger vers le formulaire de recherche
+            header('Location: index.php?ctl=trajet&action=recherche');
+            exit;
+        }
+        
+        // Effectuer à nouveau la recherche
+        $trajets = DbTrajet::chercherTrajets($depart, $arrivee, $date, $heureActuelle);
+        include 'vue/vueTrajet/v_resultat_trajet.php';
         break;
 
     

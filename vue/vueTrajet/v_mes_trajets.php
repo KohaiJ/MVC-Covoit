@@ -16,42 +16,44 @@ function formatDate($date) {
 ?>
 
 <div class="container mt-5">
-    <div class="position-relative mb-4">
-        <h2 class="text-center">Mes Trajets</h2>
-        <a href="index.php?ctl=trajet&action=ajouterTrajet" class="btn btn-dark position-absolute top-50 end-0 translate-middle-y">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="text-primary">Mes Trajets</h2>
+        <a href="index.php?ctl=trajet&action=ajouterTrajet" class="btn btn-outline-primary">
             <i class="bi bi-plus-lg"></i> Ajouter un trajet
         </a>
     </div>
 
     <?php if (!empty($trajets)): ?>
-        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 mt-4">
+        <div class="row g-4">
             <?php foreach ($trajets as $trajet): ?>
-                <div class="col">
-                    <div class="card h-100 shadow-sm position-relative">
-                        <a href="index.php?ctl=compteTrajets&action=supprimerTrajet&id=<?= $trajet['id'] ?>" 
-                           class="btn btn-danger btn-sm position-absolute top-0 end-0 m-2"
-                           onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce trajet ?');">
-                            <i class="fas fa-trash"></i>
-                        </a>
-                        <div class="card-body">
-                            <h5 class="card-title">
-                                <i class="bi bi-geo-alt-fill text-dark"></i> 
+                <div class="col-12 col-md-6 col-lg-4">
+                    <div class="card h-100 border-primary">
+                        <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+                            <span>
+                                <i class="bi bi-geo-alt-fill"></i> 
                                 <?php echo ucfirst_utf8(htmlspecialchars($trajet['LieuDepart'])); ?> 
                                 <i class="bi bi-arrow-right"></i> 
                                 <?php echo ucfirst_utf8(htmlspecialchars($trajet['LieuArrive'])); ?>
-                            </h5>
+                            </span>
+                            <a href="index.php?ctl=compteTrajets&action=supprimerTrajet&id=<?= $trajet['id'] ?>" 
+                               class="btn btn-danger btn-sm"
+                               onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce trajet ?');">
+                                <i class="fas fa-trash"></i>
+                            </a>
+                        </div>
+                        <div class="card-body">
                             <p class="card-text">
-                                <i class="bi bi-calendar-event"></i> 
+                                <i class="bi bi-calendar-event text-primary"></i> 
                                 <?php echo formatDate($trajet['DateTrajet']); ?> à 
                                 <?php echo htmlspecialchars($trajet['heureDepart']); ?>
                             </p>
                             <p class="card-text">
-                                <i class="bi bi-people-fill"></i> 
+                                <i class="bi bi-people-fill text-primary"></i> 
                                 <?php echo htmlspecialchars($trajet['places']); ?> place(s) disponible(s)
                             </p>
                             <?php if (isset($trajet['marque']) && isset($trajet['modele'])): ?>
                                 <p class="card-text">
-                                    <i class="bi bi-car-front-fill"></i> 
+                                    <i class="bi bi-car-front-fill text-primary"></i> 
                                     <?php echo ucfirst_utf8(htmlspecialchars($trajet['marque'])) . ' ' . ucfirst_utf8(htmlspecialchars($trajet['modele'])); ?>
                                 </p>
                             <?php endif; ?>

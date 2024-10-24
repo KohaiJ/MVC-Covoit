@@ -1,7 +1,13 @@
 <?php
 session_start();
 
-include 'vue/entete.php'; // L'entête est toujours incluse
+// Vérifier si l'utilisateur est connecté
+$userConnected = isset($_SESSION['connect']) && $_SESSION['connect'] === true;
+
+// Inclure l'en-tête seulement si l'utilisateur est connecté
+if ($userConnected) {
+    include 'vue/entete.php';
+}
 
 if (isset($_GET['ctl'])) {
     switch ($_GET['ctl']) {
@@ -33,7 +39,7 @@ if (isset($_GET['ctl'])) {
 // Affiche la page d'accueil si aucun autre contrôleur n'est appelé
 if (!isset($_GET['ctl'])) {
     // Si l'utilisateur est connecté, on affiche la page d'accueil
-    if (isset($_SESSION['connect']) && $_SESSION['connect'] === true) {
+    if ($userConnected) {
         include 'vue/body.php'; // Inclure la page d'accueil
     } else {
         // Sinon, on affiche le formulaire de connexion
@@ -41,6 +47,8 @@ if (!isset($_GET['ctl'])) {
     }
 }
 
-include 'vue/footer.php'; // L'inclusion du footer est toujours faite
-
+// Inclure le footer seulement si l'utilisateur est connecté
+if ($userConnected) {
+    include 'vue/footer.php';
+}
 ?>
