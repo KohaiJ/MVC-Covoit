@@ -17,7 +17,7 @@ class DbReservation {
 
         if ($stmt->rowCount() == 0) {
             // Si la réservation n'existe pas, on l'insère
-            $sql = "INSERT INTO reserver (idEtudiant, idTrajet, etat) VALUES (:idEtudiant, :idTrajet, 'En attente')";
+            $sql = "INSERT INTO reserver (idEtudiant, idTrajet, etat, netat) VALUES (:idEtudiant, :idTrajet, 'En attente', '1)";
             $stmt = $conn->prepare($sql);
             $stmt->bindParam(':idEtudiant', $idEtudiant);
             $stmt->bindParam(':idTrajet', $idTrajet);

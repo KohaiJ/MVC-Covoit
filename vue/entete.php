@@ -50,6 +50,9 @@
               <a class="nav-link" href="index.php?ctl=Import&action=afficherImport">Import(admin)</a>
             </li>
           <?php endif; ?>
+          <li class="nav-item">
+            <a class="nav-link" href="index.php?ctl=gestionReservations&action=afficherReservations">Gestion réservations</a>
+          </li>
         </ul>
         <!-- Affichage du nom de l'utilisateur connecté -->
         <ul class="navbar-nav ms-auto">

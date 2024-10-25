@@ -26,6 +26,9 @@ if (isset($_GET['ctl'])) {
         case 'compteTrajets':
             include 'controleur/ctlCompteTrajets.php';
             break;
+        case 'gestionReservations':
+            include 'controleur/ctlGestionReservations.php';
+            break;
         // Ajoutez d'autres contrôleurs si nécessaire
     }
 }

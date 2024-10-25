@@ -37,7 +37,7 @@ switch ($action) {
             }
             else{
             // Enregistrer la réservation dans la base de données
-            $insertReservation = $conn->prepare("INSERT INTO reserver (idTrajet, idEtudiant, etat) VALUES (:idTrajet, :idEtudiant, 'reserve')");
+            $insertReservation = $conn->prepare("INSERT INTO reserver (idTrajet, idEtudiant, etat) VALUES (:idTrajet, :idEtudiant, 'en attente', '1)");
             $insertReservation->bindParam(':idTrajet', $idTrajet);
             $insertReservation->bindParam(':idEtudiant', $idEtudiant);
     
