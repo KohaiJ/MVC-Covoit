@@ -48,6 +48,18 @@ class DbCompte {
         $stmt->bindParam(':id', $idVoiture);
         return $stmt->execute(); // Renvoie vrai si la suppression a réussi, faux sinon
     }
+
+    public static function updatePreferences($email, $preferences) {
+        $conn = MySqlDb::getPdoDb();
+        $sql = "UPDATE etudiant SET cigarette = :cigarette, nourriture = :nourriture, musique = :musique, bagage = :bagage WHERE email = :email";
+        $stmt = $conn->prepare($sql);
+        $stmt->bindParam(':cigarette', $preferences['cigarette'], PDO::PARAM_INT);
+        $stmt->bindParam(':nourriture', $preferences['nourriture'], PDO::PARAM_INT);
+        $stmt->bindParam(':musique', $preferences['musique'], PDO::PARAM_INT);
+        $stmt->bindParam(':bagage', $preferences['bagage'], PDO::PARAM_INT);
+        $stmt->bindParam(':email', $email);
+        return $stmt->execute();
+    }
     
 }
 

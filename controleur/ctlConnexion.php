@@ -29,7 +29,7 @@ switch($action){
             $_SESSION['id'] = $tabresult['row']['id'];
             $_SESSION['vehicule'] = $tabresult['row']['vehicule'];
             $_SESSION['administrateur'] = $tabresult['row']['administrateur'];
-
+            $_SESSION['idEtudiant'] = $idEtudiant; // Après une connexion réussie
             header('Location: index.php'); // Redirection vers la page principale
             exit();
         } else {

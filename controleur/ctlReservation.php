@@ -1,49 +1,36 @@
 <?php
-require_once './model/DbReservation.php';
-require_once './model/DbCompte.php'; // Pour récupérer les infos de l'étudiant
-require_once './model/DbConnect.php';
-$action =$_GET['action'];
-switch ($action) {
+include_once './model/DbReservation.php';
+include_once './model/DbTrajet.php';
 
-
-    case 'reserverTrajet':
-
-        if (isset($_GET['id'])) {
-            $idTrajet = $_GET['id'];
-
-            // Récupération de l'ID de l'étudiant (par exemple depuis la session)
-            $idEtudiant = $_SESSION['id'];
-
-            // Vérifier si l'étudiant a déjà réservé ce trajet
-            $conn = MySqlDb::getPdoDb();
-            $checkReservation = $conn->prepare("SELECT * FROM reserver WHERE idTrajet = :idTrajet AND idEtudiant = :idEtudiant");
-            $checkReservation->bindParam(':idTrajet', $idTrajet);
-            $checkReservation->bindParam(':idEtudiant', $idEtudiant);
-            $checkReservation->execute();
-           
-
-            if ($checkReservation->rowCount() > 0) {
-                echo "<center>Vous avez déjà réservé ce trajet.</center>";
-                break;
-            }
-
-            // Enregistrer la réservation dans la base de données
-            $insertReservation = $conn->prepare("INSERT INTO reserver (idTrajet, idEtudiant, etat) VALUES (:idTrajet, :idEtudiant, 'reserve')");
-            $insertReservation->bindParam(':idTrajet', $idTrajet);
-            $insertReservation->bindParam(':idEtudiant', $idEtudiant);
-
-            $success = $insertReservation->execute();
-
-            // Redirection ou message de succès/erreur
-            if ($success) {
-                echo "<center>Réservation effectuée avec succès.</center>";
-            } else {
-                echo "<center>Échec de la réservation.</center>";
-            }
+class CtlReservation {
+    public static function reserver() {
+        if (!isset($_SESSION['id']) || !isset($_POST['idTrajet']) || !isset($_POST['placesReservees'])) {
+            header('Location: index.php');
+            exit();
         }
-        break;
 
+        $idEtudiant = $_SESSION['id'];
+        $idTrajet = $_POST['idTrajet'];
+        $placesReservees = intval($_POST['placesReservees']);
+
+        // Vérifier si le trajet existe et s'il y a assez de places
+        $trajet = DbTrajet::getTrajetById($idTrajet);
+        if (!$trajet || $trajet['places'] < $placesReservees) {
+            $_SESSION['message'] = "Erreur : places insuffisantes ou trajet invalide.";
+            header('Location: index.php?ctl=trajet&action=detail&id=' . $idTrajet);
+            exit();
+        }
+
+        // Effectuer la réservation
+        if (DbReservation::ajouterReservation($idEtudiant, $idTrajet, $placesReservees)) {
+            // Mettre à jour le nombre de places disponibles
+            DbTrajet::updatePlacesDisponibles($idTrajet, $trajet['places'] - $placesReservees);
+            $_SESSION['message'] = "Réservation effectuée avec succès !";
+        } else {
+            $_SESSION['message'] = "Erreur lors de la réservation.";
+        }
+
+        header('Location: index.php?ctl=trajet&action=detail&id=' . $idTrajet);
+        exit();
+    }
 }
-
-
-?>

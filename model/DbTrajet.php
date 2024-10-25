@@ -47,7 +47,8 @@ class DbTrajet {
     public static function getTrajetById($idTrajet) {
         $conn = MySqlDb::getPdoDb();
         $sql = "SELECT t.*, e.nom AS nomEtudiant, e.prenom AS prenomEtudiant, 
-                   v.marque, v.modele, v.nbPlace
+                   v.marque, v.modele, v.nbPlace,
+                   e.cigarette, e.nourriture, e.musique, e.bagage
             FROM trajet t
             JOIN etudiant e ON t.idEtudiant = e.id
             LEFT JOIN voiture v ON t.idVoiture = v.id
@@ -69,27 +70,9 @@ class DbTrajet {
         return $trajet;
     }
 
-    public static function getReservationById($idEtudiant) { 
-        $conn = MySqlDb::getPdoDb();
-        $sql = "SELECT * FROM reserver";
-        $stmt = $conn->prepare($sql);
-        $stmt->bindParam(':idEtudiant', $idEtudiant);
-        $stmt->execute();
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
-    }
-
     public static function getTrajetByUserId($idEtudiant) {
         $conn = MySqlDb::getPdoDb();
         $sql = "SELECT * FROM trajet WHERE idEtudiant = :idEtudiant";
-        $stmt = $conn->prepare($sql);
-        $stmt->bindParam(':idEtudiant', $idEtudiant);
-        $stmt->execute();
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
-    }
-
-    public static function getReservationsByUserId($idEtudiant) {
-        $conn = MySqlDb::getPdoDb();
-        $sql = "SELECT * FROM reserver WHERE idEtudiant = :idEtudiant";
         $stmt = $conn->prepare($sql);
         $stmt->bindParam(':idEtudiant', $idEtudiant);
         $stmt->execute();
@@ -103,5 +86,18 @@ class DbTrajet {
         $stmt->bindParam(':id', $idTrajet);
         return $stmt->execute();
     }
+
+    public static function getPlacesDisponibles($idTrajet) {
+        $conn = MySqlDb::getPdoDb();
+        $sql = "SELECT places FROM trajet WHERE id = :idTrajet";
+        $stmt = $conn->prepare($sql);
+        $stmt->bindParam(':idTrajet', $idTrajet);
+        $stmt->execute();
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        
+        return $result ? $result['places'] : 0;
+    }
+
+    
 }
 ?>

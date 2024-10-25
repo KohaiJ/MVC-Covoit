@@ -65,8 +65,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  border-top-right-radius: 0.5rem;
-  border-bottom-right-radius: 0.5rem;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
   border-top-left-radius: 0;
   border-bottom-left-radius: 0;
 }

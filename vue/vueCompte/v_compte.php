@@ -47,6 +47,33 @@
             font-size: 1.2rem;
             font-weight: bold;
         }
+        .preferences-card {
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 1rem;
+            background-color: #fff;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        .preferences-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+            background-color: #f8f9fa;
+        }
+        .preferences-card h5 {
+            font-weight: bold;
+            margin-bottom: 1rem;
+            color: #1e3a8a;
+        }
+        .preferences-card .form-check i {
+            margin-right: 0.5rem;
+            color: #1e3a8a;
+        }
+        .preferences-card .form-check-label {
+            font-weight: bold;
+            color: #333;
+        }
     </style>
 </head>
 <body>
@@ -99,10 +126,54 @@
         </div>
     </div>
 
-    <?php if (!empty($voitures)): ?>
+    <!-- Nouvelle section pour les préférences en voiture -->
     <div class="row mt-4">
         <div class="col-12">
-            <h3 class="mb-4">Mes Véhicules</h3>
+            <div class="preferences-card mb-4">
+                <h5 class="card-title">CE QUE TU ACCEPTES EN VOITURE</h5>
+                <br>
+                <form method="POST" action="index.php?ctl=compte&action=updatePreferences" class="text-center">
+                    <div class="d-flex justify-content-around align-items-center mb-3">
+                        <div class="form-check form-switch">
+                            <label class="form-check-label d-flex align-items-center" for="cigarette">
+                                <i class="fas fa-smoking me-2"></i>CIGARETTE
+                                <input class="form-check-input ms-2" type="checkbox" id="cigarette" name="cigarette" value="1" <?= $compte['cigarette'] ? 'checked' : '' ?>>
+                            </label>
+                        </div>
+                        <div class="form-check form-switch">
+                            <label class="form-check-label d-flex align-items-center" for="nourriture">
+                                <i class="fas fa-hamburger me-2"></i>NOURRITURE
+                                <input class="form-check-input ms-2" type="checkbox" id="nourriture" name="nourriture" value="1" <?= $compte['nourriture'] ? 'checked' : '' ?>>
+                            </label>
+                        </div>
+                        <div class="form-check form-switch">
+                            <label class="form-check-label d-flex align-items-center" for="musique">
+                                <i class="fas fa-music me-2"></i>MUSIQUE
+                                <input class="form-check-input ms-2" type="checkbox" id="musique" name="musique" value="1" <?= $compte['musique'] ? 'checked' : '' ?>>
+                            </label>
+                        </div>
+                        <div class="form-check form-switch">
+                            <label class="form-check-label d-flex align-items-center" for="bagage">
+                                <i class="fas fa-suitcase me-2"></i>BAGAGE
+                                <input class="form-check-input ms-2" type="checkbox" id="bagage" name="bagage" value="1" <?= $compte['bagage'] ? 'checked' : '' ?>>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="mt-3">
+                        <button type="submit" class="btn btn-custom">Mettre à jour les préférences</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <?php if (!empty($voitures)): ?>
+    <div class="row mt-4">
+        <div class="col-12 d-flex justify-content-between align-items-center mb-3">
+            <h5 class="mb-0">Mes Véhicules</h5>
+            <a href="index.php?ctl=voiture&action=voiture" class="btn btn-custom btn-sm">
+                <i class="fas fa-plus-circle me-2"></i>Ajouter un véhicule
+            </a>
         </div>
         <?php foreach ($voitures as $voiture): ?>
         <div class="col-md-4 mb-4">
@@ -120,5 +191,20 @@
         </div>
         <?php endforeach; ?>
     </div>
+    <?php else: ?>
+    <div class="row mt-4">
+        <div class="col-12 d-flex justify-content-between align-items-center mb-3">
+            <h5 class="mb-0">Mes Véhicules</h5>
+            <a href="index.php?ctl=voiture&action=voiture" class="btn btn-custom btn-sm">
+                <i class="fas fa-plus-circle me-2"></i>Ajouter un véhicule
+            </a>
+        </div>
+        <div class="col-12">
+            <p>Vous n'avez pas encore ajouté de véhicule.</p>
+        </div>
+    </div>
     <?php endif; ?>
 </div>
+
+</body>
+</html>

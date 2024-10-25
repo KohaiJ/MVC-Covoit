@@ -9,6 +9,8 @@
   <!-- FontAwesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
   
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
+  
   <link rel="stylesheet" href="./style.css">
   
   <title>Saint-Aspais Covoit</title>
@@ -67,17 +69,16 @@
             <li class="nav-item">
               <a class="nav-link" href="index.php"><i class="fas fa-home me-1"></i> Accueil</a>
             </li>
-            <?php if (isset($_SESSION['vehicule']) && $_SESSION['vehicule'] == 1) : ?>
-              <li class="nav-item">
-                <a class="nav-link" href="index.php?ctl=voiture&action=voiture"><i class="fas fa-car me-1"></i> Voiture</a>
-              </li>
-            <?php endif; ?>
+            <li class="nav-item">
+              <a class="nav-link" href="index.php?ctl=reservations&action=mesReservations"><i class="fas fa-bookmark me-1"></i> Mes réservations</a>
+            </li>
             <li class="nav-item">
               <a class="nav-link" href="index.php?ctl=compteTrajets&action=mesTrajets"><i class="fas fa-route me-1"></i> Mes trajets</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="index.php?ctl=compte&action=compte"><i class="fas fa-user me-1"></i> Compte</a>
             </li>
+            <!-- Nouveau bouton pour Mes réservations -->
           <?php endif; ?>
           <?php if (isset($_SESSION['administrateur']) && $_SESSION['administrateur'] == 1) : ?>
             <li class="nav-item">
@@ -102,3 +103,4 @@
       </div>
     </div>
   </nav>
+

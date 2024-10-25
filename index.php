@@ -1,5 +1,7 @@
 <?php
 session_start();
+ini_set('display_errors', 1);
+error_reporting(E_ALL);
 
 // Vérifier si l'utilisateur est connecté
 $userConnected = isset($_SESSION['connect']) && $_SESSION['connect'] === true;
@@ -26,13 +28,15 @@ if (isset($_GET['ctl'])) {
         case 'Import':
             include 'controleur/ctlImport.php';
             break;
-        case 'reservation':
-            include './controleur/ctlReservation.php';
-            break;
         case 'compteTrajets':
             include 'controleur/ctlCompteTrajets.php';
             break;
-        // Ajoutez d'autres contrôleurs si nécessaire
+        case 'reservations':
+            if ($_GET['ctl'] == 'reservations' && $_GET['action'] == 'mesReservations') {
+                require_once 'controleur/ctlReservations.php';
+                mesReservations();
+            }
+            break;
     }
 }
 
