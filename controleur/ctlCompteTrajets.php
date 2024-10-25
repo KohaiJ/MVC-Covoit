@@ -38,5 +38,30 @@ switch($action) {
     default:
         // Gérer le cas par défaut ou les erreurs
         break;
+
+
+        DbTrajet::supprimerTrajet($idTrajet);
+        header("Location: index.php?ctl=compte&action=compte"); 
+        exit();
+        
+        
+
+        
+    break;
+
+
+
+    case 'supprimerReservation':
+        
+
+
+        $idTrajetreservation = $_GET['idTrajet'];  
+        DbTrajet::supprimerReservation($idTrajetreservation);
+        
+        header("Location: index.php?ctl=compte&action=compte"); 
+        exit();
+    break;
+
 }
+
 ?>

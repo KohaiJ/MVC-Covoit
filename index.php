@@ -37,6 +37,10 @@ if (isset($_GET['ctl'])) {
                 mesReservations();
             }
             break;
+        case 'gestionReservations':
+            include 'controleur/ctlGestionReservations.php';
+            break;
+        // Ajoutez d'autres contrôleurs si nécessaire
     }
 }
 

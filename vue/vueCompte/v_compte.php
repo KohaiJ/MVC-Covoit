@@ -191,20 +191,66 @@
         </div>
         <?php endforeach; ?>
     </div>
-    <?php else: ?>
-    <div class="row mt-4">
-        <div class="col-12 d-flex justify-content-between align-items-center mb-3">
-            <h5 class="mb-0">Mes Véhicules</h5>
-            <a href="index.php?ctl=voiture&action=voiture" class="btn btn-custom btn-sm">
-                <i class="fas fa-plus-circle me-2"></i>Ajouter un véhicule
+</div>
+<?php endif; ?>
+
+<?php if (!empty($trajets)): ?>
+<div class="container mt-5">
+    <h3 class="text-center mb-4">Informations des Trajets</h3>
+    <!--<div class="d-flex justify-content-center">
+        <div class="mx-2">
+            <a href="index.php?ctl=compteTrajets&action=vuedestrajets" class="btn btn-primary btn-lg">
+                Afficher vos trajets
             </a>
         </div>
         <div class="col-12">
             <p>Vous n'avez pas encore ajouté de véhicule.</p>
         </div>
-    </div>
-    <?php endif; ?>
+    </div>-->
 </div>
+<?php endif; ?>
 
-</body>
-</html>
+<?php if (!empty($trajets)): ?>
+    <table style="width: 100%; border-collapse: collapse; margin: 20px 0;">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Lieu de départ</th>
+            <th>Lieu d'arrivée</th>
+            <th>Date du trajet</th>
+            <th>Heure de départ</th>
+            <th>Places disponibles</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php foreach ($trajets as $index => $trajet): ?>
+            <tr style="background-color: <?php echo $index % 2 == 0 ? '#f2f2f2' : 'white'; ?>;">
+                <td><?php echo htmlspecialchars($trajet['id']); ?></td>
+                <td><?php echo htmlspecialchars($trajet['LieuDepart']); ?></td>
+                <td><?php echo htmlspecialchars($trajet['LieuArrive']); ?></td>
+                <td><?php echo htmlspecialchars($trajet['DateTrajet']); ?></td>
+                <td><?php echo htmlspecialchars($trajet['heureDepart']); ?></td>
+                <td><?php echo htmlspecialchars($trajet['places'] !== null ? $trajet['places'] : 'N/A'); ?></td>
+              
+                <td>
+                <div class="card position-relative">
+                    <a href="index.php?ctl=compteTrajets&action=supprimerTrajet&id=<?= $trajet['id'] ?>"
+                       class="btn btn-danger position-absolute"
+                       
+                       onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce trajet ?');">
+                        <i class="fas fa-trash"></i>
+                    </a>
+                    <div class="card-body">
+                </td>
+            </tr>
+        <?php endforeach; ?>
+    </tbody>
+</table>
+
+<?php else: ?>
+    <p>Aucun trajet trouvé.</p>
+<?php endif; ?>
+
+
+

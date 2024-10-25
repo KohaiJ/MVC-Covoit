@@ -85,6 +85,9 @@
               <a class="nav-link" href="index.php?ctl=Import&action=afficherImport"><i class="fas fa-cog me-1"></i> Import (admin)</a>
             </li>
           <?php endif; ?>
+          <li class="nav-item">
+            <a class="nav-link" href="index.php?ctl=gestionReservations&action=afficherReservations">Gestion réservations</a>
+          </li>
         </ul>
         <ul class="navbar-nav">
           <?php if (isset($_SESSION['nom'])): ?>
