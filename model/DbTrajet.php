@@ -114,6 +114,14 @@ class DbTrajet {
         $stmt->bindParam(':id', $idTrajet);
         return $stmt->execute();
     }
+
+    public static function recupererplacereserve($idTrajet){
+        $conn = MySqlDb::getPdoDb();
+        $sql = "UPDATE trajet SET places = places + 1 WHERE id = :id";
+        $stmt = $conn->prepare($sql);
+        $stmt->bindParam(':id', $idTrajet);
+        return $stmt->execute();
+    }
 }
 ?>
 

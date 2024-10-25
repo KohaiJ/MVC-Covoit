@@ -17,10 +17,30 @@ switch($action){
 
 
 
-    case 'gererReservation':
-        $idReservation = $_POST['idReservation'];
-        $action = $_POST['action'];
-        DbGestionReservations::gererReservation($idReservation, $action);
+    case 'gererReservationacceptees':
+        $idEtudiant = $_POST['idEtudiant'];
+        $idTrajet = $_POST['idTrajet'];
+        $succes = DbGestionReservations::UpdateReservationsAcceptees($idEtudiant, $idTrajet);
+       
+        if($succes==true){
+            echo "<center>Réservation acceptée avec succès</center>";
+        }else{
+            echo "<center>Erreur lors de la mise à jour de l'état de la réservation ou réservation déjà gérée</center>";
+        }
+    break;
+
+    case 'gererReservationrefusees':
+        $idEtudiant = $_POST['idEtudiant'];
+        $idTrajet = $_POST['idTrajet'];
+        DbTrajet::recupererplacereserve($idTrajet);
+        $succes = DbGestionReservations::UpdateReservationsRefusees($idEtudiant, $idTrajet);
+
+        
+        if($succes==true){
+            echo "<center>Réservation refusée avec succès</center>";
+        }else{
+            echo "<center>Erreur lors de la mise à jour de l'état de la réservation ou réservation déjà gérée</center>";
+        }
     break;
 
 
